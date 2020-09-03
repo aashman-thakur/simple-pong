@@ -1,19 +1,20 @@
 var p, c, ball, edges, l;
 
 function setup() {
-  createCanvas(600, 475)
-  p = createSprite(575, 250, 20, 150);
-  c = createSprite(25, 250, 20, 150);
-  ball = createSprite(300, 250, 20, 20);
-  l = createSprite(300, 250, 1, 500)
+  createCanvas(windowWidth,windowHeight)
+  p = createSprite(width-(width/24), height/2,width/30,height/3.5);
+  c = createSprite(width/24, height/2,width/30,height/3.5);
+  ball = createSprite(width/2,height/2, width/30);
+  l = createSprite(width/2,height/2, width/600,height)
   edges = createEdgeSprites();
 }
 
 function draw() {
   background("black");
+  ball.height=ball.width
   fill('white')
-  textSize(25)
-  text('press space to serve', 200, 25)
+  textSize(width/24)
+  text('press space to serve',width/3, height/20)
   ball.bounceOff(edges[3])
   ball.bounceOff(edges[2])
   ball.bounceOff(p)
@@ -31,11 +32,11 @@ function draw() {
     ball.velocityY = 6
     ball.velocityX = 6
   }
-  if (ball.x > 599) {
-    ball.x = 300
-    ball.y = 250
-    ball.velocityX = 0
-    ball.velocityY = 0
+  if(ball.isTouching(edges[1])){
+    ball.y=height/2
+    ball.x=width/2
+    ball.velocityX=0
+    ball.velocityY=0
   }
   drawSprites();
 }
